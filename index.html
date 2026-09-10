@@ -32,3 +32,174 @@
 
   main{padding:18px;}
   section.tab{display:none;}
+  section.tab.active{display:block;}
+
+  .field-card{background:var(--card); border-radius:16px; padding:16px; margin-bottom:14px;}
+  .field-row{display:flex; align-items:center; justify-content:space-between; gap:10px; padding:8px 0;}
+  .field-row + .field-row{border-top:1px solid var(--line);}
+  .field-label{font-size:13px; color:var(--muted);}
+  select.dark, input.dark{background:var(--card2); border:1px solid var(--line); color:var(--text); font-family:'Inter',sans-serif; font-size:13.5px; padding:8px 12px; border-radius:10px;}
+  .pill-toggle{display:flex; gap:8px;}
+  .pill-toggle button{background:var(--card2); border:1px solid var(--line); color:var(--muted); font-size:12.5px; padding:7px 12px; border-radius:20px; cursor:pointer;}
+  .pill-toggle button.sel{background:var(--blue-bg); border-color:var(--blue); color:#9EC2FB;}
+  .file-path{font-family:monospace; font-size:12px; color:var(--muted); max-width:150px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+
+  .big-btn{width:100%; background:linear-gradient(135deg,#3B82F6,#2563EB); color:#fff; border:none; border-radius:16px; padding:16px; font-size:15.5px; font-weight:700; font-family:'Poppins',sans-serif; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; margin-bottom:18px;}
+  .big-btn:active{transform:scale(0.98);}
+  .outline-btn{width:100%; background:none; border:1.5px solid var(--green); color:var(--green); border-radius:14px; padding:13px; font-size:14px; font-weight:600; cursor:pointer;}
+
+  .stat-grid{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:18px;}
+  .stat{background:var(--card); border-radius:14px; padding:14px;}
+  .stat .num{font-family:'Poppins',sans-serif; font-weight:800; font-size:26px; line-height:1;}
+  .stat .lbl{font-size:11.5px; color:var(--muted); margin-top:6px;}
+  .stat.green .num{color:var(--green);} .stat.red .num{color:var(--red);}
+  .stat.blue .num{color:var(--blue);} .stat.purple .num{color:var(--purple);}
+
+  .section-label{font-size:12px; color:var(--muted2); text-transform:uppercase; letter-spacing:0.04em; margin:22px 0 10px;}
+
+  .result-card{background:var(--card); border-radius:14px; padding:13px 14px; margin-bottom:9px; display:flex; align-items:center; justify-content:space-between; gap:10px;}
+  .result-card .capa{font-family:monospace; font-size:12px; color:var(--text); font-weight:600;}
+  .result-card .meta{font-size:11.5px; color:var(--muted); margin-top:3px;}
+  .result-card .len{font-family:'Poppins',sans-serif; font-weight:700; font-size:15px; text-align:right;}
+  .badge{font-size:10px; font-weight:600; padding:3px 8px; border-radius:6px; display:inline-block; margin-right:6px;}
+  .badge.emp{background:var(--green-bg); color:var(--green);}
+  .badge.ado{background:var(--blue-bg); color:#7FB0FA;}
+  .badge.col{background:var(--purple-bg); color:#D5A6FA;}
+
+  .warn-card{background:var(--red-bg); border:1px solid #4A2126; border-radius:14px; padding:14px; margin-bottom:14px;}
+  .warn-card .title{color:var(--red); font-weight:700; font-size:13.5px; display:flex; align-items:center; gap:6px; margin-bottom:6px;}
+  .warn-card p{font-size:12.5px; color:#E8B9BD; margin:0 0 10px;}
+  .warn-card .actions{display:flex; gap:8px;}
+  .warn-card .actions button{flex:1; font-size:12px; padding:7px 0; border-radius:8px; border:1px solid #4A2126; background:none; color:#E8B9BD; cursor:pointer;}
+  .warn-card .actions button.primary{background:var(--red); border-color:var(--red); color:#fff; font-weight:600;}
+
+  .config-row{background:var(--card); border-radius:14px; padding:12px 14px; margin-bottom:8px; display:flex; align-items:center; justify-content:space-between; gap:10px;}
+  .config-row .capa{font-family:monospace; font-size:12px; font-weight:600;}
+  .config-row .dest{font-family:monospace; font-size:11px; color:var(--muted); margin-top:3px;}
+  .config-row .edit{color:var(--muted); font-size:16px; cursor:pointer;}
+
+  .toast{display:none; position:sticky; bottom:14px; margin-top:10px; background:var(--green-bg); border:1px solid #1F4A30; color:var(--green); font-size:13px; font-weight:600; text-align:center; padding:12px; border-radius:12px;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="app-icon">📐</div>
+  <div class="titles">
+    <h1>MetradoPlugin</h1>
+    <div class="sub"><span class="dot"></span>AutoCAD 2025/2026 · Llanos Zapata</div>
+  </div>
+</header>
+
+<nav class="tabs">
+  <button class="tab-btn active" data-tab="metrar">📏 Metrado</button>
+  <button class="tab-btn" data-tab="resultados">📊 Resultados</button>
+  <button class="tab-btn" data-tab="config">⚙️ Config</button>
+</nav>
+
+<main>
+
+  <section class="tab active" id="tab-metrar">
+    <div class="field-card">
+      <div class="field-row">
+        <span class="field-label">Nivel</span>
+        <select class="dark"><option>Nivel 1</option><option>Sótano</option><option>Azotea</option></select>
+      </div>
+      <div class="field-row">
+        <span class="field-label">Fuente</span>
+        <div class="pill-toggle">
+          <button class="sel">Seleccionados</button>
+          <button>Todo el dibujo</button>
+        </div>
+      </div>
+      <div class="field-row">
+        <span class="field-label">Plantilla</span>
+        <span class="file-path">metrado_terraza_del_sol.xlsx</span>
+      </div>
+    </div>
+
+    <button class="big-btn">🔍 Analizar dibujo</button>
+
+    <div class="section-label">Última corrida</div>
+    <div class="stat-grid">
+      <div class="stat green"><div class="num">13</div><div class="lbl">✅ Capas configuradas</div></div>
+      <div class="stat red"><div class="num">1</div><div class="lbl">⚠️ Sin configurar</div></div>
+      <div class="stat blue"><div class="num">4,708</div><div class="lbl">📏 Metros totales</div></div>
+      <div class="stat purple"><div class="num">14</div><div class="lbl">🗂️ Capas leídas</div></div>
+    </div>
+  </section>
+
+  <section class="tab" id="tab-resultados">
+    <div class="warn-card">
+      <div class="title">⚠️ Capa no configurada</div>
+      <p><span style="font-family:monospace">AF-VENT 2</span> — 14 objetos, 22.40 m. No tiene destino en ITEMIZADO IISS.</p>
+      <div class="actions">
+        <button>Ignorar</button>
+        <button>Configurar</button>
+        <button class="primary">Cancelar export</button>
+      </div>
+    </div>
+
+    <div class="section-label">Capas metradas (13)</div>
+
+    <div class="result-card">
+      <div><span class="badge emp">Empotrada</span><div class="capa">AF-TUB. EMP 1.2</div><div class="meta">Ø20mm → ITEMIZADO IISS!E37</div></div>
+      <div class="len">1390.17 m</div>
+    </div>
+    <div class="result-card">
+      <div><span class="badge emp">Empotrada</span><div class="capa">AF-TUB EMP. 3.4</div><div class="meta">Ø25mm → ITEMIZADO IISS!E38</div></div>
+      <div class="len">1267.94 m</div>
+    </div>
+    <div class="result-card">
+      <div><span class="badge ado">Adosada</span><div class="capa">AF-ADO 2</div><div class="meta">Ø63mm → ITEMIZADO IISS!E48</div></div>
+      <div class="len">237.68 m</div>
+    </div>
+    <div class="result-card">
+      <div><span class="badge ado">Adosada</span><div class="capa">AF-ADO 2 1_2</div><div class="meta">Ø75mm → ITEMIZADO IISS!E49</div></div>
+      <div class="len">384.90 m</div>
+    </div>
+    <div class="result-card">
+      <div><span class="badge col">Agua caliente</span><div class="capa">AC - TUB 1.2</div><div class="meta">Ø20mm → ITEMIZADO IISS!E84</div></div>
+      <div class="len">2208.89 m</div>
+    </div>
+
+    <button class="big-btn" style="margin-top:16px;" id="exportBtn">⬇️ Exportar a Excel</button>
+    <div class="toast" id="toast">✅ Metrado escrito en metrado_terraza_del_sol.xlsx</div>
+  </section>
+
+  <section class="tab" id="tab-config">
+    <div class="section-label">Mapeo capa → Excel (13)</div>
+
+    <div class="config-row"><div><div class="capa">AF-TUB. EMP 1.2</div><div class="dest">ITEMIZADO IISS!E37</div></div><span class="edit">✏️</span></div>
+    <div class="config-row"><div><div class="capa">AF-TUB EMP. 3.4</div><div class="dest">ITEMIZADO IISS!E38</div></div><span class="edit">✏️</span></div>
+    <div class="config-row"><div><div class="capa">AF-TUB EMP. 1</div><div class="dest">ITEMIZADO IISS!E39</div></div><span class="edit">✏️</span></div>
+    <div class="config-row"><div><div class="capa">AF-ADO 3_4</div><div class="dest">ITEMIZADO IISS!E46</div></div><span class="edit">✏️</span></div>
+    <div class="config-row"><div><div class="capa">AF-ADO 1 1_2</div><div class="dest">ITEMIZADO IISS!E47</div></div><span class="edit">✏️</span></div>
+    <div class="config-row"><div><div class="capa">AC - TUB. 3.4</div><div class="dest">ITEMIZADO IISS!E85</div></div><span class="edit">✏️</span></div>
+
+    <button class="outline-btn" style="margin-top:14px;">➕ Agregar capa</button>
+  </section>
+
+</main>
+
+<script>
+  document.querySelectorAll('.tab-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+      document.querySelectorAll('.tab').forEach(function(s){ s.classList.remove('active'); });
+      btn.classList.add('active');
+      document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+    });
+  });
+  document.querySelectorAll('.pill-toggle button').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      btn.parentNode.querySelectorAll('button').forEach(function(b){ b.classList.remove('sel'); });
+      btn.classList.add('sel');
+    });
+  });
+  document.getElementById('exportBtn').addEventListener('click', function(){
+    document.getElementById('toast').style.display = 'block';
+  });
+</script>
+</body>
+</html>
